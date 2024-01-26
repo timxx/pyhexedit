@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from PySide2.QtWidgets import (
+from PySide6.QtWidgets import (
     QAbstractScrollArea,
     QApplication)
-from PySide2.QtGui import (
+from PySide6.QtGui import (
     QPainter,
     QFont,
     QFontInfo,
     QFontMetrics,
     QPen,
     QColor)
-from PySide2.QtCore import(
+from PySide6.QtCore import (
     QPointF,
     QPoint,
     Qt,
@@ -18,17 +18,10 @@ from PySide2.QtCore import(
     QTimer,
     Signal)
 
-import PySide2
-
 from .stylehelper import dpiScaled
 
 
 __all__ = ["PyHexEdit"]
-
-
-QT_VERSION = (PySide2.__version_info__[0] << 16) + \
-    (PySide2.__version_info__[1] << 8) + \
-    (PySide2.__version_info__[2])
 
 
 def _isInvisibleChar(char):
@@ -170,11 +163,7 @@ class PyHexEdit(QAbstractScrollArea):
         self._lineHeight = fm.height()
         self._ascent = fm.ascent()
 
-        if QT_VERSION >= 0x050B00:
-            self._charWidth = fm.horizontalAdvance('0')
-        else:
-            self._charWidth = fm.width('0')
-
+        self._charWidth = fm.horizontalAdvance('0')
         self._addrWidth = 0
         self._hexPosX = 0
         self._asciiPosX = 0
